@@ -4,6 +4,7 @@ CREATE TABLE payments (
     amount NUMERIC NOT NULL,
     currency VARCHAR(3) NOT NULL,
     status VARCHAR(20) NOT NULL,
+    payment_method VARCHAR(50) NOT NULL,
     provider VARCHAR(50) NOT NULL,
     reference VARCHAR(100) UNIQUE NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
