@@ -23,7 +23,7 @@ class PaymentService {
             throw new Error(`Cannot confirm payment with status ${payment.status}`);
         }
         const providerResult = this.simulateProvider();
-        const newStatus = providerResult.success ? 'COMPLETED' : 'FAILED';
+        const newStatus = providerResult.success ? 'SUCCESS' : 'FAILED';
         return PaymentRepository.updatePaymentStatus(paymentId, newStatus, providerResult);
     }
     static async refundPayment(paymentId) {
@@ -41,6 +41,10 @@ class PaymentService {
     }
     static async getPaymentEvents(paymentId) {
         return PaymentRepository.listPaymentEvents(paymentId);
+    }
+    static async listPayments() {
+        const { rows } = await PaymentRepository.listAllPayments();
+        return rows;
     }
     static simulateProvider() {
         const success = Math.random() > 0.2;

@@ -46,6 +46,9 @@ class PaymentRepository {
         );
         return rows;
     }
+    static async listAllPayments() {
+        return pool.query('SELECT * FROM payments ORDER BY created_at DESC;');
+    }
 }
 
 module.exports = PaymentRepository;
